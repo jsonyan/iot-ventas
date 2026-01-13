@@ -39,9 +39,9 @@ class InventarioController extends Controller
         //Verificamos si existe algun tag rfid sin asignar en la tabla producto_tag_rfid
         $tags_sin_asignar = ProductoTagRFID::where('ptr_estado', 'inicializado')->get();
         if(count($tags_sin_asignar) > 0){
-            return response()->json(array('status'=>'1', 'mensaje'=>'Existe tag sin asignar'));
+            return response()->json(array('status'=>'1', 'mensaje'=>'Existe tag sin asignar'))->header('Content-Type', 'application/json');
         }else{
-            return response()->json(array('status'=>'0', 'mensaje'=>'No existe tag sin asignar'));
+            return response()->json(array('status'=>'0', 'mensaje'=>'No existe tag sin asignar'))->header('Content-Type', 'application/json');
         }
     }
     //esta funcion procesa una peticion post desde el sensor que envia el uid del tag rfid leido
