@@ -42,7 +42,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <a class="navbar-brand navbar-brand-centered" href="#">
-                        <img style="height:55px;" src="{{ asset('img/logo_agua.png')}}" alt="..." class="">
+                        <img style="height:55px;" src="{{ secure_asset('img/logo_agua.png')}}" alt="..." class="">
                     </a>
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
