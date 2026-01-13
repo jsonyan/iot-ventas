@@ -9,7 +9,7 @@ use App\Models\Producto;
 use App\Models\InventarioLog;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InventarioController extends Controller
 {

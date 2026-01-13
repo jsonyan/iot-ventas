@@ -11,8 +11,7 @@
         "josiasmontag/laravel-recaptchav3": "^1.0",
         "laravel/framework": "^11.0.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^3.0",
-        "simplesoftwareio/simple-qrcode": "^2.0"
+        "laravel/tinker": "^3.0"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^2.0",
