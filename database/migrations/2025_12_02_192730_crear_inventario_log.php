@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('inventario_log', function (Blueprint $table) {
+            $table->Increments('ilo_id');
+            $table->integer('pro_id');
+            $table->text('ilo_tipo_movimiento');//ingreso-salida
+            $table->double('ilo_cantidad');
+            $table->text('ilo_fuente');
+            $table->text('ilo_descripcion');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+        //
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('inventario_log');
+    }
+};
