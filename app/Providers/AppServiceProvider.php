@@ -26,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
     {
         //Modificando la plantilla por defecto del paginator
         Paginator::defaultView('vendor.pagination.bootstrap-4');
-        Paginator::defaultSimpleView('vendor.pagination.bootstrap-4');        
+        Paginator::defaultSimpleView('vendor.pagination.bootstrap-4');       
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
+                
     }
 }
