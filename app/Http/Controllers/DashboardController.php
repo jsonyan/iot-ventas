@@ -57,17 +57,18 @@ class DashboardController extends Controller
             $total_ventas_anio = $total_ventas_anio + $item->ven_total;
         }
 
-        //obtener la salidas de inventario_log del mes actual
-        $salidas = InventarioLog::where('ilo_tipo_movimiento', 'salida')
-                        ->whereMonth('created_at', $mes)
-                        ->whereYear('created_at', $anio)
-                        ->count();
-        //obtener la entradas de inventario_log del mes actual
-        $entradas = InventarioLog::where('ilo_tipo_movimiento', 'entrada')
-                        ->whereMonth('created_at', $mes)
-                        ->whereYear('created_at', $anio)
-                        ->count();
+        //obtener las entradas y salidas de inventario_log del mes actual
+        $inicio = Carbon::now()->startOfMonth();
+        $fin    = Carbon::now()->endOfMonth();
 
+        $salidas = InventarioLog::where('ilo_tipo_movimiento', 'salida')
+            ->whereBetween('created_at', [$inicio, $fin])
+            ->count();
+
+        $entradas = InventarioLog::where('ilo_tipo_movimiento', 'entrada')
+            ->whereBetween('created_at', [$inicio, $fin])
+            ->count();
+        
         //ventas ultimos 6 meses (muestra el nombre del mes y el total de ventas)
         $ventas_ultimos_6_meses = collect();
 
@@ -77,8 +78,9 @@ class DashboardController extends Controller
             $fin    = Carbon::now()->subMonths($i)->endOfMonth();
 
             $total = Venta::whereBetween('ven_fecha_venta', [$inicio, $fin])
-                ->sum('ven_total');
-
+                ->selectRaw('SUM(CAST(ven_total AS NUMERIC)) as total')
+                ->value('total');
+    
             $ventas_ultimos_6_meses->push([
                 'anio' => $inicio->year,
                 'mes_num' => $inicio->month,
