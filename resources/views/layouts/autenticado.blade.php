@@ -19,12 +19,12 @@
     crossorigin=""/>
 
     {{--   JS PARA TODO EL PROYECTO   --}}
-    <script src="{{url('js/jquery36.min.js')}}"></script>
-    <script src="{{url('js/popper.min.js')}}"></script>
-    <script src="{{url('js/bootstrap.min.js')}}"></script>
-    <script src="{{url('js/datatables.min.js')}}"></script>
-    <script src="{{url('js/bootstrap-multiselect.min.js')}}"></script>
-    <script src="{{url('js/select2.min.js')}}"></script>
+    <script src="{{secure_url('js/jquery36.min.js')}}"></script>
+    <script src="{{secure_url('js/popper.min.js')}}"></script>
+    <script src="{{secure_url('js/bootstrap.min.js')}}"></script>
+    <script src="{{secure_url('js/datatables.min.js')}}"></script>
+    <script src="{{secure_url('js/bootstrap-multiselect.min.js')}}"></script>
+    <script src="{{secure_url('js/select2.min.js')}}"></script>
     <script src="{{url('js/chart.min.js')}}"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -42,7 +42,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <a class="navbar-brand navbar-brand-centered" href="#">
-                        <img style="height:55px;" src="{{ asset('img/logo_agua.png')}}" alt="..." class="">
+                        <img style="height:55px;" src="{{ secure_asset('img/logo_agua.png')}}" alt="..." class="">
                     </a>
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
@@ -94,7 +94,7 @@
     {{-- TOP MENÚ (FIN) --}}
 
     {{-- CONTENEDOR PRINCIPAL (INICIO) --}}
-    <div class="row page-content"">
+    <div class="row page-content">
         {{-- MENU CONTEXTUAL --}}
         <div class="col-md-2 nav-contextual-container">
             <div class="nav-contextual">
