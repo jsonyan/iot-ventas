@@ -8,7 +8,7 @@
         <i class="fa fa-line-chart"></i>
         {{$titulo}}
         <a href="#" id="btn-imprimir" class="btn btn-sm btn-primary float-right" style="margin-left:10px;"><i class="fa fa-print"></i> IMPRIMIR</a>
-        <a href="{{secure_url('reportes/')}}" class="btn btn-sm btn-secondary float-right" style="margin-left:10px;"><i class="fa fa-arrow-left"></i> ATRAS</a>
+        <a href="{{url('reportes/')}}" class="btn btn-sm btn-secondary float-right" style="margin-left:10px;"><i class="fa fa-arrow-left"></i> ATRAS</a>
     </h3>
     <div class="row">
         <div class="col-12">              
@@ -18,7 +18,7 @@
                         @if($reporte->count() == 0)
                         <div class="alert alert-info">
                             <div class="media">
-                                <img src="{{secure_asset('img/alert-info.png')}}" class="align-self-center mr-3" alt="...">
+                                <img src="{{asset('img/alert-info.png')}}" class="align-self-center mr-3" alt="...">
                                 <div class="media-body">
                                     <h5 class="mt-0">Nota.-</h5>
                                     <p>
@@ -33,6 +33,46 @@
                             <br>
                             <small>Fecha: {{date('d/m/Y H:i:s')}}</small>
                         </h4>
+                        <!--  RESUMEN FINANCIERO -->
+                    <div class="row text-center mb-3">
+
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h6>INGRESOS</h6>
+                                    <h4>{{ number_format($total_ingresos,2) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body">
+                                    <h6>COSTOS</h6>
+                                    <h4>{{ number_format($total_costos,2) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body">
+                                    <h6>UTILIDAD</h6>
+                                    <h4>{{ number_format($total_utilidad,2) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card bg-dark text-white">
+                                <div class="card-body">
+                                    <h6>MARGEN</h6>
+                                    <h4>{{ number_format($margen_utilidad,2) }}%</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                          <table class="table table-bordered tabla-datos">
                             <thead>
                             <tr>
@@ -47,6 +87,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                             <!-- original codigo  
                             @foreach($reporte as $item)
                             <tr>
                                 <td class="text-center">
@@ -74,16 +115,56 @@
                                     {{$item->utilidad}}
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach -->
+                            @foreach($reporte as $item)
+                            <tr>
+                                <td class="text-center">{{ $item->pro_nombre }}</td>
+                                <td class="text-center">{{ $item->pro_precio_compra }}</td>
+                                <td class="text-center">{{ $item->pro_precio_venta }}</td>
+                                <td class="text-center">{{ $item->total_comprado ?? 0 }}</td>
+                                <td class="text-center">{{ $item->total_vendido ?? 0 }}</td>
+
+                                <!--FORMATO NUMÉRICO -->
+                                <td class="text-right">{{ number_format($item->ingresos,2) }}</td>
+                                <td class="text-right">{{ number_format($item->costo_ventas,2) }}</td>
+                                <td class="text-right">{{ number_format($item->utilidad,2) }}</td>
+                            </tr>
+                            @endforeach 
+                            
+                            <!-- TOTAL CORREGIDO -->
+                        <tr style="font-weight:bold; background:#e9ecef;">
+                            <td colspan="3" class="text-center">TOTAL</td>
+                            <td class="text-center">{{ $total_comprado }}</td>
+                            <td class="text-center">{{ $total_vendido }}</td>
+                            <td class="text-right text-success">{{ number_format($total_ingresos,2) }}</td>
+                            <td class="text-right text-danger">{{ number_format($total_costos,2) }}</td>
+                            <td class="text-right text-primary">{{ number_format($total_utilidad,2) }}</td>
+                        </tr>
+
+                            <!-- TOTAL GENERAL PROFESIONAL 
+                        <tr style="font-weight:bold; background:#e9ecef;">
+                            <td class="text-center">TOTAL</td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-center">{{ $total_comprado }}</td>
+                            <td class="text-center">{{ $total_vendido }}</td>
+                            <td class="text-center text-success">{{ number_format($total_ingresos,2) }}</td>
+                            <td class="text-center text-danger">{{ number_format($total_costos,2) }}</td>
+                            <td class="text-center text-primary">{{ number_format($total_utilidad,2) }}</td>
+                        </tr> -->
+
+                             <!-- agregando el codigo  
+                            <tr style="font-weight:bold; background:#f2f2f2;">
+                                <td>Total</td>
+                                <td colspan="6"></td>
+                                <td>{{ number_format($total_utilidad, 2) }}</td>
+                            </tr> -->
                             </tbody>
                         </table>
                         @endif
                     </div>
                 </div>
                 <!-- fin card  -->
-
-
-
         </div>
     </div>
 </div>
@@ -111,7 +192,7 @@
             </div>
             <div class="alert alert-danger">
                 <div class="media">
-                    <img src="{{secure_asset('img/alert-danger.png')}}" class="align-self-center mr-3" alt="...">
+                    <img src="{{asset('img/alert-danger.png')}}" class="align-self-center mr-3" alt="...">
                     <div class="media-body">
                         <h5 class="mt-0">Cuidado.-</h5>
                         <p>
@@ -123,7 +204,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
-          <form id="form-eliminar-venta" action="{{secure_url('ventas')}}" data-simple-action="{{secure_url('ventas')}}" method="post">
+          <form id="form-eliminar-venta" action="{{url('ventas')}}" data-simple-action="{{url('ventas')}}" method="post">
             @method('delete')
             @csrf
                 <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Si, eliminar</button>
@@ -142,7 +223,7 @@ $(function(){
     * CONFIGURACION DATA TABLES
     -------------------------------------------------------------
     */
-    $('.tabla-datos').DataTable({"language":{url: '{{secure_asset('js/datatables-lang-es.json')}}'}, "order": [[ 0, "desc" ]]});
+    $('.tabla-datos').DataTable({"language":{url: '{{asset('js/datatables-lang-es.json')}}'}, "order": [[ 0, "desc" ]]});
 
     //Conf popover
     $('[data-toggle="popover"]').popover()
