@@ -7,7 +7,7 @@
     <h3 class="title-header" style="text-transform: uppercase;">
         <i class="fa fa-qrcode"></i>
         {{$titulo}}
-        <a href="{{url('inventario')}}" class="btn btn-sm btn-secondary float-right" style="margin-left:10px;"><i class="fa fa-arrow-left"></i> ATRAS</a>
+        <a href="{{secure_url('inventario')}}" class="btn btn-sm btn-secondary float-right" style="margin-left:10px;"><i class="fa fa-arrow-left"></i> ATRAS</a>
     </h3>
     <div class="row">
         <div class="col-12">              
@@ -79,7 +79,7 @@ $(function(){
     //btn-finalizar redirige a inventarios
     $('#btn-finalizar').on('click', function(e){
         e.preventDefault();
-        window.location.href = "{{ url('inventario') }}";
+        window.location.href = "{{ secure_url('inventario') }}";
     });
 
     function onScanSuccess(decodedText, decodedResult) {
